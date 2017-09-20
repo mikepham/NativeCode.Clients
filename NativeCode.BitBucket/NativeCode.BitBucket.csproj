@@ -5,7 +5,6 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Models\V2\" />
-    <Folder Include="Handlers\" />
     <Folder Include="Extensions\" />
     <Folder Include="ContractResolvers\" />
   </ItemGroup>

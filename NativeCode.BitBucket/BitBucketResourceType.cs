@@ -2,6 +2,10 @@
 {
     public enum BitBucketResourceType
     {
-        Invalid = 0
+        Invalid = 0,
+        
+        Branches,
+        
+        Users,
     }
 }

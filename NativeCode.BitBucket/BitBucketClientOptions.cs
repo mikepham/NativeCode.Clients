@@ -5,10 +5,10 @@ namespace NativeCode.BitBucket
 {
     public class BitBucketClientOptions
     {
-        public Uri BaseUri { get; set; }
+        public Uri BaseAddress { get; set; }
 
         public NetworkCredential Credentials { get; set; }
 
-        public BitBucketClientType Type { get; set; }
+        public BitBucketClientType ClientType { get; set; }
     }
 }

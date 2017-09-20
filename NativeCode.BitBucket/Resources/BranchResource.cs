@@ -9,6 +9,36 @@ namespace NativeCode.BitBucket.Resources
         {
         }
 
+        public override string GetCollectionUrl(BitBucketClientContext context)
+        {
+            switch (context.ClientType)
+            {
+                case BitBucketClientType.ApiV1:
+                    throw new NotSupportedException();
+
+                case BitBucketClientType.ApiV2:
+                    return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/refs/branches";
+
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
+        public override string GetPostUrl(BitBucketClientContext context)
+        {
+            switch (context.ClientType)
+            {
+                case BitBucketClientType.ApiV1:
+                    throw new NotSupportedException();
+
+                case BitBucketClientType.ApiV2:
+                    return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/refs/branches/{context.BranchSlug}";
+
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
         public override string GetUrl(BitBucketClientContext context)
         {
             switch (context.ClientType)
@@ -17,7 +47,7 @@ namespace NativeCode.BitBucket.Resources
                     throw new NotSupportedException();
 
                 case BitBucketClientType.ApiV2:
-                    return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}";
+                    return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/refs/branches/{context.BranchSlug}";
 
                 default:
                     throw new InvalidOperationException();
