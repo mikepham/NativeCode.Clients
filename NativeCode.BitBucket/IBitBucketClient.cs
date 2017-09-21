@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using NativeCode.BitBucket.Models;
@@ -14,6 +15,8 @@ namespace NativeCode.BitBucket
         BranchResource Branches { get; }
 
         BitBucketClientType ClientType { get; }
+        
+        NetworkCredential Credentials { get; }
 
         [NotNull]
         IBitBucketResource<PullRequest> PullRequests { get; }

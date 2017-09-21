@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Net.Mime;
 using NativeCode.BitBucket.Models.V2;
 
 namespace NativeCode.BitBucket.Resources
 {
-    public class UserResource : BitBucketResource<User>
+    public class PullRequestResource : BitBucketResource<PullRequest>
     {
-        public UserResource(IBitBucketClient client) : base(client)
+        public PullRequestResource(IBitBucketClient client) : base(client)
         {
         }
 
@@ -19,23 +18,7 @@ namespace NativeCode.BitBucket.Resources
 
                 case BitBucketClientType.ApiV2:
                 case BitBucketClientType.Cloud:
-                    return "/2.0/user";
-
-                default:
-                    throw new InvalidOperationException();
-            }
-        }
-
-        public override string GetResourcePageUrl(BitBucketClientContext context)
-        {
-            switch (context.ClientType)
-            {
-                case BitBucketClientType.ApiV1:
-                    throw new NotSupportedException();
-
-                case BitBucketClientType.ApiV2:
-                case BitBucketClientType.Cloud:
-                    return "/2.0/users";
+                    return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/pullrequests/{context.PullRequestSlug}";
 
                 default:
                     throw new InvalidOperationException();
@@ -51,7 +34,23 @@ namespace NativeCode.BitBucket.Resources
 
                 case BitBucketClientType.ApiV2:
                 case BitBucketClientType.Cloud:
-                    return "/2.0/user";
+                    return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/pullrequests";
+
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
+        public override string GetResourcePageUrl(BitBucketClientContext context)
+        {
+            switch (context.ClientType)
+            {
+                case BitBucketClientType.ApiV1:
+                    throw new NotSupportedException();
+
+                case BitBucketClientType.ApiV2:
+                case BitBucketClientType.Cloud:
+                    return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/pullrequests/{context.PullRequestSlug}";
 
                 default:
                     throw new InvalidOperationException();

@@ -2,12 +2,12 @@
 {
     public enum BitBucketClientType
     {
-        None = 0,
+        Default = 0,
 
         ApiV1 = 1,
 
-        ApiV2 = 2,
+        ApiV2 = Default,
 
-        Cloud = ApiV2
+        Cloud = 2
     }
 }

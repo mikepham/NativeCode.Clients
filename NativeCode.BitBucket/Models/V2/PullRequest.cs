@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace NativeCode.BitBucket.Models.V2
 {
     [DataContract]
-    public class PullRequest : ResourceResponse<PullRequest>
+    public class PullRequest
     {
         [DataMember]
         public string ClosedBy { get; }
@@ -33,6 +33,7 @@ namespace NativeCode.BitBucket.Models.V2
         public string Reason { get; }
 
         [DataMember]
+        [JsonConverter(typeof(EnumValueConverter))]
         public PullRequestState State { get; }
 
         [DataMember]
@@ -43,7 +44,7 @@ namespace NativeCode.BitBucket.Models.V2
 
         [DataMember]
         [JsonConverter(typeof(EnumValueConverter))]
-        public BitBucketResourceType Type { get; }
+        public ResourceType Type { get; }
 
         [DataMember]
         public DateTimeOffset UpdatedOn { get; }

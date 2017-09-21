@@ -25,7 +25,7 @@ namespace NativeCode.BitBucket.Models.V2
 
         [DataMember]
         [JsonConverter(typeof(EnumValueConverter))]
-        public BitBucketResourceType Type { get; protected set; }
+        public ResourceType Type { get; protected set; }
 
         [DataMember]
         public string Username { get; protected set; }

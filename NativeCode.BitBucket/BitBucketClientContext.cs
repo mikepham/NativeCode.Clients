@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NativeCode.BitBucket.Models.V2;
 
 namespace NativeCode.BitBucket
 {
@@ -12,8 +13,10 @@ namespace NativeCode.BitBucket
         
         public IDictionary<string, string> Parameters { get; } = new Dictionary<string, string>();
         
+        public string PullRequestSlug { get; set; }
+        
         public string RepoSlug { get; set; }
         
-        public BitBucketResourceType ResourceType { get; set; }
+        public ResourceType ResourceType { get; set; }
     }
 }

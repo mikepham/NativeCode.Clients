@@ -1,6 +1,6 @@
-﻿namespace NativeCode.BitBucket
+﻿namespace NativeCode.BitBucket.Models.V2
 {
-    public enum BitBucketResourceType
+    public enum ResourceType
     {
         Invalid = 0,
         

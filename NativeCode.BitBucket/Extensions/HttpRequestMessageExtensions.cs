@@ -13,11 +13,6 @@ namespace NativeCode.BitBucket.Extensions
             return BitBucketHeaders.JsonMediaTypes.Contains(content.Headers.ContentType.MediaType.ToLower());
         }
 
-        public static bool NoBitBucketModel([NotNull] this HttpRequestMessage request)
-        {
-            return request.Content.Headers.Contains(BitBucketHeaders.ModelType) == false;
-        }
-
         public static void Serialize<T>([NotNull] this HttpRequestMessage request, [NotNull] T instance)
         {
             var content = JsonConvert.SerializeObject(instance, SerializationOptions.Settings);

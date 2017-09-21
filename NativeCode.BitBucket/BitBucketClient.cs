@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -30,6 +31,8 @@ namespace NativeCode.BitBucket
             }
 
             this.Branches = new BranchResource(this);
+            this.PullRequests = new PullRequestResource(this);
+            this.Teams = new TeamResource(this);
             this.Users = new UserResource(this);
         }
 
@@ -37,9 +40,11 @@ namespace NativeCode.BitBucket
 
         public BitBucketClientType ClientType => this.options.ClientType;
 
+        public NetworkCredential Credentials => this.options.Credentials;
+
         public IBitBucketResource<PullRequest> PullRequests { get; }
 
-        public IBitBucketResource<Repository> Repositories { get; }
+        public IBitBucketResource<Repository> Repositories => throw new NotSupportedException();
 
         public IBitBucketResource<Team> Teams { get; }
 

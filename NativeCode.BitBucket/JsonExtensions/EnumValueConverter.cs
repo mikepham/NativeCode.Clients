@@ -15,9 +15,9 @@ namespace NativeCode.BitBucket.JsonExtensions
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (objectType.IsEnum && existingValue is string)
+            if (objectType.IsEnum && reader.Value is string)
             {
-                return Enum.Parse(objectType, (string) existingValue, true);
+                return Enum.Parse(objectType, (string) reader.Value, true);
             }
 
             return existingValue;

@@ -9,22 +9,6 @@ namespace NativeCode.BitBucket.Resources
         {
         }
 
-        public override string GetResourcePageUrl(BitBucketClientContext context)
-        {
-            switch (context.ClientType)
-            {
-                case BitBucketClientType.ApiV1:
-                    throw new NotSupportedException();
-
-                case BitBucketClientType.ApiV2:
-                case BitBucketClientType.None:
-                    return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/refs/branches";
-
-                default:
-                    throw new InvalidOperationException();
-            }
-        }
-
         public override string GetActionUrl(BitBucketClientContext context)
         {
             switch (context.ClientType)
@@ -33,8 +17,24 @@ namespace NativeCode.BitBucket.Resources
                     throw new NotSupportedException();
 
                 case BitBucketClientType.ApiV2:
-                case BitBucketClientType.None:
+                case BitBucketClientType.Cloud:
                     return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/refs/branches/{context.BranchSlug}";
+
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
+        public override string GetResourcePageUrl(BitBucketClientContext context)
+        {
+            switch (context.ClientType)
+            {
+                case BitBucketClientType.ApiV1:
+                    throw new NotSupportedException();
+
+                case BitBucketClientType.ApiV2:
+                case BitBucketClientType.Cloud:
+                    return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/refs/branches";
 
                 default:
                     throw new InvalidOperationException();
@@ -49,7 +49,7 @@ namespace NativeCode.BitBucket.Resources
                     throw new NotSupportedException();
 
                 case BitBucketClientType.ApiV2:
-                case BitBucketClientType.None:
+                case BitBucketClientType.Cloud:
                     return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/refs/branches/{context.BranchSlug}";
 
                 default:

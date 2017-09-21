@@ -4,9 +4,9 @@ using NativeCode.BitBucket.Models.V2;
 
 namespace NativeCode.BitBucket.Resources
 {
-    public class UserResource : BitBucketResource<User>
+    public class TeamResource : BitBucketResource<Team>
     {
-        public UserResource(IBitBucketClient client) : base(client)
+        public TeamResource(IBitBucketClient client) : base(client)
         {
         }
 
@@ -19,7 +19,7 @@ namespace NativeCode.BitBucket.Resources
 
                 case BitBucketClientType.ApiV2:
                 case BitBucketClientType.Cloud:
-                    return "/2.0/user";
+                    return "/2.0/repositories/teams";
 
                 default:
                     throw new InvalidOperationException();
@@ -35,7 +35,7 @@ namespace NativeCode.BitBucket.Resources
 
                 case BitBucketClientType.ApiV2:
                 case BitBucketClientType.Cloud:
-                    return "/2.0/users";
+                    return "/2.0/repositories/teams";
 
                 default:
                     throw new InvalidOperationException();
@@ -51,7 +51,7 @@ namespace NativeCode.BitBucket.Resources
 
                 case BitBucketClientType.ApiV2:
                 case BitBucketClientType.Cloud:
-                    return "/2.0/user";
+                    return "/2.0/repositories/teams";
 
                 default:
                     throw new InvalidOperationException();

@@ -4,9 +4,9 @@ using Xunit;
 
 namespace NativeCode.BitBucket.Tests
 {
-    public class WhenUsingWorkingWithAccount : IClassFixture<BitBucketClientFixture>
+    public class WhenUsingBitBucketClient : IClassFixture<BitBucketClientFixture>
     {
-        public WhenUsingWorkingWithAccount(BitBucketClientFixture fixture)
+        public WhenUsingBitBucketClient(BitBucketClientFixture fixture)
         {
             this.fixture = fixture;
         }
@@ -25,7 +25,7 @@ namespace NativeCode.BitBucket.Tests
                 var user = await client.Users.GetAsync(context);
 
                 // Assert
-                Assert.Equal(BitBucketClientFixture.Credentials.UserName, user.Username);
+                Assert.Equal(client.Credentials.UserName, user.Username);
             }
         }
         
@@ -42,6 +42,22 @@ namespace NativeCode.BitBucket.Tests
 
                 // Assert
                 Assert.True(branches.Any());
+            }
+        }
+        
+        [Fact]
+        public async Task ShouldGetListOfPullRequests()
+        {
+            // Arrange
+            using (var client = this.fixture.CreateClient())
+            {
+                var context = client.CreateContext("plsos2", "plsos2");
+
+                // Act
+                var pullRequests = await client.PullRequests.GetAllAsync(context);
+
+                // Assert
+                Assert.NotNull(pullRequests);
             }
         }
     }
