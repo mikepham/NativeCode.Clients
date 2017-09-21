@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using Humanizer;
+using NativeCode.BitBucket.Models;
 
 namespace NativeCode.BitBucket
 {
@@ -22,11 +24,37 @@ namespace NativeCode.BitBucket
 
         public virtual Type Type => typeof(T);
 
+        public virtual Task<IEnumerable<T>> GetAllAsync(BitBucketClientContext context)
+        {
+            try
+            {
+                return this.Client.GetAllAsync<T>(this, context);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
         public virtual Task<T> GetAsync(BitBucketClientContext context)
         {
             try
             {
                 return this.Client.GetAsync<T>(this, context);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
+        public virtual Task<ResourcePagingResponse<T>> GetPageAsync(BitBucketClientContext context)
+        {
+            try
+            {
+                return this.Client.GetPageAsync<T>(this, context);
             }
             catch (Exception ex)
             {
@@ -47,11 +75,11 @@ namespace NativeCode.BitBucket
                 throw;
             }
         }
-
-        public abstract string GetCollectionUrl(BitBucketClientContext context);
         
-        public abstract string GetPostUrl(BitBucketClientContext context);
+        public abstract string GetActionUrl(BitBucketClientContext context);
 
-        public abstract string GetUrl(BitBucketClientContext context);
+        public abstract string GetResourcePageUrl(BitBucketClientContext context);
+
+        public abstract string GetResourceUrl(BitBucketClientContext context);
     }
 }

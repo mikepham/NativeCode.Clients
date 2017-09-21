@@ -1,7 +1,7 @@
 ﻿using Humanizer;
 using Newtonsoft.Json.Serialization;
 
-namespace NativeCode.BitBucket.ContractResolvers
+namespace NativeCode.BitBucket.JsonExtensions
 {
     public class UnderscoreContractResolver : DefaultContractResolver
     {

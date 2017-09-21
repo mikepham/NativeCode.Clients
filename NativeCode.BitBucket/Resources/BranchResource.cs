@@ -9,7 +9,7 @@ namespace NativeCode.BitBucket.Resources
         {
         }
 
-        public override string GetCollectionUrl(BitBucketClientContext context)
+        public override string GetResourcePageUrl(BitBucketClientContext context)
         {
             switch (context.ClientType)
             {
@@ -17,6 +17,7 @@ namespace NativeCode.BitBucket.Resources
                     throw new NotSupportedException();
 
                 case BitBucketClientType.ApiV2:
+                case BitBucketClientType.None:
                     return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/refs/branches";
 
                 default:
@@ -24,7 +25,7 @@ namespace NativeCode.BitBucket.Resources
             }
         }
 
-        public override string GetPostUrl(BitBucketClientContext context)
+        public override string GetActionUrl(BitBucketClientContext context)
         {
             switch (context.ClientType)
             {
@@ -32,6 +33,7 @@ namespace NativeCode.BitBucket.Resources
                     throw new NotSupportedException();
 
                 case BitBucketClientType.ApiV2:
+                case BitBucketClientType.None:
                     return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/refs/branches/{context.BranchSlug}";
 
                 default:
@@ -39,7 +41,7 @@ namespace NativeCode.BitBucket.Resources
             }
         }
 
-        public override string GetUrl(BitBucketClientContext context)
+        public override string GetResourceUrl(BitBucketClientContext context)
         {
             switch (context.ClientType)
             {
@@ -47,6 +49,7 @@ namespace NativeCode.BitBucket.Resources
                     throw new NotSupportedException();
 
                 case BitBucketClientType.ApiV2:
+                case BitBucketClientType.None:
                     return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/refs/branches/{context.BranchSlug}";
 
                 default:

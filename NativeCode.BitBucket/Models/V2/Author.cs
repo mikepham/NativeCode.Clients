@@ -5,16 +5,16 @@ using Newtonsoft.Json;
 namespace NativeCode.BitBucket.Models.V2
 {
     [DataContract]
-    public class Branch
+    public class Author
     {
         [DataMember]
-        public string Name { get; protected set; }
+        public string Raw { get; protected set; }
         
-        [DataMember]
-        public Target Target { get; protected set; }
-
         [DataMember]
         [JsonConverter(typeof(EnumValueConverter))]
         public BitBucketResourceType Type { get; protected set; }
+        
+        [DataMember]
+        public User User { get; protected set; }
     }
 }

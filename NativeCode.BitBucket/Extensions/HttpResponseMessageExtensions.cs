@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
-using NativeCode.BitBucket.ContractResolvers;
 using Newtonsoft.Json;
 
 namespace NativeCode.BitBucket.Extensions

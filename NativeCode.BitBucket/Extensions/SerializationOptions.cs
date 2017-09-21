@@ -1,4 +1,4 @@
-﻿using NativeCode.BitBucket.ContractResolvers;
+﻿using NativeCode.BitBucket.JsonExtensions;
 using Newtonsoft.Json;
 
 namespace NativeCode.BitBucket.Extensions

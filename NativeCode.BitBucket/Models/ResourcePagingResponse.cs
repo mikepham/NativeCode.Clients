@@ -1,14 +1,25 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace NativeCode.BitBucket.Models
 {
-    public abstract class ResourcePagingResponse<T> : PagingOptions, IResponse
+    [DataContract]
+    public class ResourcePagingResponse<T> : PagingOptions, IResponse
     {
-        public short Page { get; }
+        [DataMember]
+        public IEnumerable<ErrorResponse> Errors { get; protected set; } = Enumerable.Empty<ErrorResponse>();
+        
+        [DataMember]
+        public string Next { get; protected set; }
 
-        public int Pagelen { get; }
+        [DataMember]
+        public short Page { get; protected set; }
 
-        public IEnumerable<T> Values { get; }
-        public IEnumerable<ErrorResponse> Errors { get; }
+        [DataMember]
+        public int Pagelen { get; protected set; }
+
+        [DataMember]
+        public IEnumerable<T> Values { get; protected set; } = Enumerable.Empty<T>();
     }
 }

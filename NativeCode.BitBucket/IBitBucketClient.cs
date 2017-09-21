@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using NativeCode.BitBucket.Models;
 using NativeCode.BitBucket.Models.V2;
+using NativeCode.BitBucket.Resources;
 
 namespace NativeCode.BitBucket
 {
     public interface IBitBucketClient : IDisposable
     {
         [NotNull]
-        IBitBucketResource<Branch> Branches { get; }
+        BranchResource Branches { get; }
 
         BitBucketClientType ClientType { get; }
 
@@ -22,12 +25,16 @@ namespace NativeCode.BitBucket
         IBitBucketResource<Team> Teams { get; }
 
         [NotNull]
-        IBitBucketResource<User> Users { get; }
+        UserResource Users { get; }
 
         [NotNull]
         BitBucketClientContext CreateContext([CanBeNull] string id = default(string), [CanBeNull] string repository = default(string));
 
-        Task<TRequest> GetAsync<TRequest>(IBitBucketResource resource, BitBucketClientContext context);
+        Task<IEnumerable<TResponse>> GetAllAsync<TResponse>(IBitBucketResource resource, BitBucketClientContext context);
+
+        Task<ResourcePagingResponse<TResponse>> GetPageAsync<TResponse>(IBitBucketResource resource, BitBucketClientContext context);
+
+        Task<TResponse> GetAsync<TResponse>(IBitBucketResource resource, BitBucketClientContext context);
 
         Task<TResponse> PostAsync<TRequest, TResponse>(TRequest instance, IBitBucketResource resource, BitBucketClientContext context);
     }

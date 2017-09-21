@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using NativeCode.BitBucket.Models;
 
 namespace NativeCode.BitBucket
 {
@@ -13,18 +15,22 @@ namespace NativeCode.BitBucket
         Type Type { get; }
 
         [NotNull]
-        string GetCollectionUrl([NotNull] BitBucketClientContext context);
+        string GetResourcePageUrl([NotNull] BitBucketClientContext context);
 
         [NotNull]
-        string GetPostUrl([NotNull] BitBucketClientContext context);
+        string GetActionUrl([NotNull] BitBucketClientContext context);
 
         [NotNull]
-        string GetUrl([NotNull] BitBucketClientContext context);
+        string GetResourceUrl([NotNull] BitBucketClientContext context);
     }
 
     public interface IBitBucketResource<T> : IBitBucketResource
         where T : class, new()
     {
+        Task<IEnumerable<T>> GetAllAsync(BitBucketClientContext context);
+
+        Task<ResourcePagingResponse<T>> GetPageAsync(BitBucketClientContext context);
+        
         Task<T> GetAsync(BitBucketClientContext context);
 
         Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, BitBucketClientContext context);

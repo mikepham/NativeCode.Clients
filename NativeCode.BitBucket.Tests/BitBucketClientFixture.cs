@@ -5,6 +5,8 @@ namespace NativeCode.BitBucket.Tests
 {
     public class BitBucketClientFixture : IDisposable
     {
+        public static readonly NetworkCredential Credentials = new NetworkCredential("mikepham-proplogix", "BUZFLckGxk298KkhWuRk");
+        
         private readonly IBitBucketClientFactory factory = new BitBucketClientFactory();
 
         public IBitBucketClient CreateClient()
@@ -12,7 +14,7 @@ namespace NativeCode.BitBucket.Tests
             var options = new BitBucketClientOptions
             {
                 BaseAddress = new Uri("https://api.bitbucket.org"),
-                Credentials = new NetworkCredential("mikepham-proplogix", "XwdZuLARwLH43YvUEnEA"),
+                Credentials = Credentials,
                 ClientType = BitBucketClientType.ApiV2,
             };
             

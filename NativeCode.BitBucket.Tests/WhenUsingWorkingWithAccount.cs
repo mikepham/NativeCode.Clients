@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace NativeCode.BitBucket.Tests
@@ -24,7 +25,23 @@ namespace NativeCode.BitBucket.Tests
                 var user = await client.Users.GetAsync(context);
 
                 // Assert
-                Assert.NotNull(user);
+                Assert.Equal(BitBucketClientFixture.Credentials.UserName, user.Username);
+            }
+        }
+        
+        [Fact]
+        public async Task ShouldGetListOfBranches()
+        {
+            // Arrange
+            using (var client = this.fixture.CreateClient())
+            {
+                var context = client.CreateContext("plsos2", "plsos2");
+
+                // Act
+                var branches = await client.Branches.GetAllAsync(context);
+
+                // Assert
+                Assert.True(branches.Any());
             }
         }
     }

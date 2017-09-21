@@ -4,8 +4,14 @@
     {
         Invalid = 0,
         
-        Branches,
+        Author,
         
-        Users,
+        Branch,
+        
+        Commit,
+        
+        Repository,
+        
+        User,
     }
 }
