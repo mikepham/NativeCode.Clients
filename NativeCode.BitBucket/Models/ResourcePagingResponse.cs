@@ -9,15 +9,12 @@ namespace NativeCode.BitBucket.Models
     {
         [DataMember]
         public IEnumerable<ErrorResponse> Errors { get; protected set; } = Enumerable.Empty<ErrorResponse>();
-        
-        [DataMember]
-        public string Next { get; protected set; }
 
         [DataMember]
         public short Page { get; protected set; }
 
         [DataMember]
-        public int Pagelen { get; protected set; }
+        public short Pagelen { get; protected set; }
 
         [DataMember]
         public IEnumerable<T> Values { get; protected set; } = Enumerable.Empty<T>();

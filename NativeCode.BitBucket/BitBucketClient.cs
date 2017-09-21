@@ -22,9 +22,11 @@ namespace NativeCode.BitBucket
         {
             this.options = options;
             this.BaseAddress = this.options.BaseAddress;
+            
             if (this.options.Credentials != null)
             {
-                this.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", CreateAuth(this.options.Credentials));
+                this.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Basic", BasicAuth(this.options.Credentials));
             }
 
             this.Branches = new BranchResource(this);
@@ -59,13 +61,13 @@ namespace NativeCode.BitBucket
             var url = this.BuildUri(context, () => resource.GetResourcePageUrl(context));
 
             var response = await this.GetAsync(url.Uri);
-            var page = await DeserializeAsync<ResourcePagingResponse<TResponse>>(response);
+            var page = await this.DeserializeAsync<ResourcePagingResponse<TResponse>>(response);
             results.AddRange(page.Values);
 
             while (string.IsNullOrWhiteSpace(page.Next) == false)
             {
                 response = await this.GetAsync(page.Next);
-                page = await DeserializeAsync<ResourcePagingResponse<TResponse>>(response);
+                page = await this.DeserializeAsync<ResourcePagingResponse<TResponse>>(response);
                 results.AddRange(page.Values);
             }
 
@@ -78,7 +80,7 @@ namespace NativeCode.BitBucket
             var url = this.BuildUri(context, () => resource.GetResourcePageUrl(context));
             var response = await this.GetAsync(url.Uri);
 
-            return await DeserializeAsync<ResourcePagingResponse<TResponse>>(response);
+            return await this.DeserializeAsync<ResourcePagingResponse<TResponse>>(response);
         }
 
         public async Task<TResponse> GetAsync<TResponse>(IBitBucketResource resource, BitBucketClientContext context)
@@ -86,7 +88,7 @@ namespace NativeCode.BitBucket
             var url = this.BuildUri(context, () => resource.GetResourceUrl(context));
             var response = await this.GetAsync(url.Uri);
 
-            return await DeserializeAsync<TResponse>(response);
+            return await this.DeserializeAsync<TResponse>(response);
         }
 
         public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest instance, IBitBucketResource resource,
@@ -98,27 +100,26 @@ namespace NativeCode.BitBucket
 
             var response = await this.SendAsync(request);
 
-            return await DeserializeAsync<TResponse>(response);
+            return await this.DeserializeAsync<TResponse>(response);
         }
 
-        private static string CreateAuth(NetworkCredential credentials)
+        protected static string BasicAuth(NetworkCredential credentials)
         {
             var auth = $"{credentials.UserName}:{credentials.Password}";
             var bytes = Encoding.UTF8.GetBytes(auth);
             return Convert.ToBase64String(bytes);
         }
 
-        private UriBuilder BuildUri(BitBucketClientContext context, Func<string> url)
+        protected UriBuilder BuildUri(BitBucketClientContext context, Func<string> path)
         {
             return new UriBuilder(this.BaseAddress)
             {
-                Path = url(),
+                Path = path(),
                 Query = string.Join(string.Empty, context.Parameters.Select(kvp => $"{kvp.Key}={kvp.Value}"))
             };
-
         }
 
-        private static async Task<TResponse> DeserializeAsync<TResponse>(HttpResponseMessage response)
+        protected virtual async Task<TResponse> DeserializeAsync<TResponse>(HttpResponseMessage response)
         {
             if (response.IsSuccessStatusCode == false || response.Content.IsJson() == false)
             {

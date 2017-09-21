@@ -1,9 +1,14 @@
-﻿namespace NativeCode.BitBucket.Models
+﻿using System.Runtime.Serialization;
+
+namespace NativeCode.BitBucket.Models
 {
+    [DataContract]
     public class PagingOptions
     {
-        public string Next { get; }
+        [DataMember]
+        public string Next { get; protected set; }
 
-        public short Size { get; }
+        [DataMember]
+        public short Size { get; protected set; }
     }
 }
