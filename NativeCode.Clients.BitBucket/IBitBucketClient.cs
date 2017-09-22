@@ -19,13 +19,13 @@
         NetworkCredential Credentials { get; }
 
         [NotNull]
-        IBitBucketResource<PullRequest> PullRequests { get; }
+        PullRequestResource PullRequests { get; }
 
         [NotNull]
         IBitBucketResource<Repository> Repositories { get; }
 
         [NotNull]
-        IBitBucketResource<Team> Teams { get; }
+        TeamResource Teams { get; }
 
         [NotNull]
         UserResource Users { get; }

@@ -18,16 +18,15 @@
     {
         private readonly BitBucketClientOptions options;
 
-        public BitBucketClient([NotNull] BitBucketClientOptions options, HttpMessageHandler handler) : base(handler,
-            true)
+        public BitBucketClient([NotNull] BitBucketClientOptions options, HttpMessageHandler handler = null)
+            : base(handler, true)
         {
             this.options = options;
             this.BaseAddress = this.options.BaseAddress;
 
             if (this.options.Credentials != null)
             {
-                this.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Basic", BasicAuth(this.options.Credentials));
+                this.DefaultRequestHeaders.Authorization = BasicAuth(this.options.Credentials);
             }
 
             this.Branches = new BranchResource(this);
@@ -42,11 +41,11 @@
 
         public NetworkCredential Credentials => this.options.Credentials;
 
-        public IBitBucketResource<PullRequest> PullRequests { get; }
+        public PullRequestResource PullRequests { get; }
 
         public IBitBucketResource<Repository> Repositories => throw new NotSupportedException();
 
-        public IBitBucketResource<Team> Teams { get; }
+        public TeamResource Teams { get; }
 
         public UserResource Users { get; }
 
@@ -109,11 +108,12 @@
             return await this.DeserializeAsync<TResponse>(response);
         }
 
-        protected static string BasicAuth(NetworkCredential credentials)
+        protected static AuthenticationHeaderValue BasicAuth(NetworkCredential credentials)
         {
             var auth = $"{credentials.UserName}:{credentials.Password}";
             var bytes = Encoding.UTF8.GetBytes(auth);
-            return Convert.ToBase64String(bytes);
+            var encoded = Convert.ToBase64String(bytes);
+            return new AuthenticationHeaderValue("Basic", encoded);
         }
 
         protected UriBuilder BuildUri(BitBucketClientContext context, Func<string> path)

@@ -11,5 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NativeCode.Clients.BitBucket\NativeCode.Clients.BitBucket.csproj" />
+    <ProjectReference Include="..\NativeCode.Clients\NativeCode.Clients.csproj" />
   </ItemGroup>
 </Project>
