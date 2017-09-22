@@ -1,7 +1,7 @@
 ﻿namespace NativeCode.Clients.BitBucket.Resources
 {
     using System;
-    using Models.V2;
+    using V2;
 
     public class UserResource : RestResource<User, BitBucketClientContext>
     {

@@ -63,26 +63,17 @@
             var url = this.BuildUri(context, () => resource.GetResourcePageUrl(context));
 
             var response = await this.GetAsync(url.Uri).ConfigureAwait(false);
-            var page = await response.DeserializeAsync<ResourcePagingResponse<TResponse>>().ConfigureAwait(false);
+            var page = await response.DeserializeAsync<BitBucketPagingResponse<TResponse>>().ConfigureAwait(false);
             results.AddRange(page.Values);
 
             while (page.Next.HasValue())
             {
                 response = await this.GetAsync(page.Next).ConfigureAwait(false);
-                page = await response.DeserializeAsync<ResourcePagingResponse<TResponse>>().ConfigureAwait(false);
+                page = await response.DeserializeAsync<BitBucketPagingResponse<TResponse>>().ConfigureAwait(false);
                 results.AddRange(page.Values);
             }
 
             return results;
-        }
-
-        public async Task<ResourcePagingResponse<TResponse>> GetPageAsync<TResponse>(IRestResource<BitBucketClientContext> resource,
-            BitBucketClientContext context)
-        {
-            var url = this.BuildUri(context, () => resource.GetResourcePageUrl(context));
-            var response = await this.GetAsync(url.Uri).ConfigureAwait(false);
-
-            return await response.DeserializeAsync<ResourcePagingResponse<TResponse>>().ConfigureAwait(false);
         }
 
         public async Task<TResponse> GetAsync<TResponse>(IRestResource<BitBucketClientContext> resource, BitBucketClientContext context)
@@ -91,6 +82,15 @@
             var response = await this.GetAsync(url.Uri).ConfigureAwait(false);
 
             return await response.DeserializeAsync<TResponse>().ConfigureAwait(false);
+        }
+
+        public async Task<PagingResponse<TResponse>> GetPageAsync<TResponse>(IRestResource<BitBucketClientContext> resource,
+            BitBucketClientContext context)
+        {
+            var url = this.BuildUri(context, () => resource.GetResourcePageUrl(context));
+            var response = await this.GetAsync(url.Uri).ConfigureAwait(false);
+
+            return await response.DeserializeAsync<BitBucketPagingResponse<TResponse>>().ConfigureAwait(false);
         }
 
         public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest instance, IRestResource<BitBucketClientContext> resource,

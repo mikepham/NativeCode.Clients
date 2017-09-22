@@ -1,6 +1,6 @@
 ﻿namespace NativeCode.Clients.BitBucket
 {
-    using Models.V2;
+    using V2;
 
     public class BitBucketClientContext : ClientContext
     {

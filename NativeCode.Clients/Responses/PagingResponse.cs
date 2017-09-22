@@ -3,9 +3,7 @@
     using System.Runtime.Serialization;
 
     [DataContract]
-    public class Link
+    public class PagingResponse<T> : ResourceResponse<T>
     {
-        [DataMember]
-        public string Href { get; protected set; }
     }
 }

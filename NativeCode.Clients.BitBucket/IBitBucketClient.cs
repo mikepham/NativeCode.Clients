@@ -18,5 +18,8 @@
 
         [NotNull]
         UserResource Users { get; }
+
+        [NotNull]
+        BitBucketClientContext CreateContext([CanBeNull] string id = default(string), [CanBeNull] string repository = default(string));
     }
 }

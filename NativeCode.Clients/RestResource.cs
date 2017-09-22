@@ -48,7 +48,7 @@
             }
         }
 
-        public virtual async Task<ResourcePagingResponse<T>> GetPageAsync(TContext context)
+        public virtual async Task<PagingResponse<T>> GetPageAsync(TContext context)
         {
             try
             {

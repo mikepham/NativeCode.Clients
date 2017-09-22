@@ -29,7 +29,7 @@
     {
         Task<IEnumerable<T>> GetAllAsync(TContext context);
 
-        Task<ResourcePagingResponse<T>> GetPageAsync(TContext context);
+        Task<PagingResponse<T>> GetPageAsync(TContext context);
 
         Task<T> GetAsync(TContext context);
 

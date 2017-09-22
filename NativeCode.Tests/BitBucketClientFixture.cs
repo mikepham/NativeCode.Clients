@@ -12,8 +12,6 @@
 
         private const string BitbucketUsername = "BITBUCKET_USERNAME";
 
-        private readonly IBitBucketClientFactory factory = new BitBucketClientFactory();
-
         public void Dispose()
         {
             this.Dispose(true);
@@ -47,7 +45,7 @@
                 Trace.WriteLine($"Failed to get credentials from environment: {ex.Message}");
             }
 
-            return this.factory.Create(options);
+            return new BitBucketClient(options);
         }
 
         protected virtual void Dispose(bool disposing)

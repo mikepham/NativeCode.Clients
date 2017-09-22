@@ -1,9 +1,6 @@
 ﻿namespace NativeCode.Clients.Responses
 {
-    using System.Collections.Generic;
-
     public abstract class ResourceResponse<T> : IResponse
     {
-        public IEnumerable<ErrorResponse> Errors { get; }
     }
 }
