@@ -1,4 +1,4 @@
-﻿namespace NativeCode.BitBucket.Models.V2
+﻿namespace NativeCode.Clients.BitBucket.Models.V2
 {
     public enum ResourceType
     {

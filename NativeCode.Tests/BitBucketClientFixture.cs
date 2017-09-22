@@ -1,7 +1,8 @@
-﻿using System;
-
-namespace NativeCode.BitBucket.Tests
+﻿namespace NativeCode.Tests
 {
+    using System;
+    using Clients.BitBucket;
+
     public class BitBucketClientFixture : IDisposable
     {
         private readonly IBitBucketClientFactory factory = new BitBucketClientFactory();

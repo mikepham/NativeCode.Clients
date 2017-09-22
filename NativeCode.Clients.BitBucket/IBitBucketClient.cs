@@ -1,4 +1,4 @@
-﻿namespace NativeCode.BitBucket
+﻿namespace NativeCode.Clients.BitBucket
 {
     using System;
     using System.Collections.Generic;

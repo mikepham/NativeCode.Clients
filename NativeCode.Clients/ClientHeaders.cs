@@ -1,6 +1,6 @@
-﻿namespace NativeCode.BitBucket
+﻿namespace NativeCode.Clients
 {
-    public static class BitBucketHeaders
+    public static class ClientHeaders
     {
         public static readonly string[] JsonMediaTypes =
         {

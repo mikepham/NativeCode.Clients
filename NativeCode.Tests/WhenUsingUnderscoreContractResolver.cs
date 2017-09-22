@@ -1,9 +1,9 @@
-using NativeCode.BitBucket.JsonExtensions;
-using Newtonsoft.Json;
-using Xunit;
-
-namespace NativeCode.BitBucket.Tests
+namespace NativeCode.Tests
 {
+    using Clients.JsonExtensions;
+    using Newtonsoft.Json;
+    using Xunit;
+
     public class WhenUsingUnderscoreContractResolver
     {
         public class SimpleClass

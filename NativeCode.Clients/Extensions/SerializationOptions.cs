@@ -1,6 +1,7 @@
 ﻿namespace NativeCode.Clients.Extensions
 {
     using JsonExtensions;
+    using Newtonsoft.Json;
 
     internal static class SerializationOptions
     {

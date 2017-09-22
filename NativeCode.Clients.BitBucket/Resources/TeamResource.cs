@@ -1,4 +1,4 @@
-﻿namespace NativeCode.BitBucket.Resources
+﻿namespace NativeCode.Clients.BitBucket.Resources
 {
     using System;
     using Models.V2;

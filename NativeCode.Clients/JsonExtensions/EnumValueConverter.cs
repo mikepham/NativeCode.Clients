@@ -1,6 +1,7 @@
 ﻿namespace NativeCode.Clients.JsonExtensions
 {
     using System;
+    using Newtonsoft.Json;
 
     public class EnumValueConverter : JsonConverter
     {

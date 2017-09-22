@@ -1,4 +1,4 @@
-﻿namespace NativeCode.BitBucket
+﻿namespace NativeCode.Clients.BitBucket
 {
     public enum BitBucketClientType
     {

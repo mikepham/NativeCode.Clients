@@ -1,4 +1,4 @@
-﻿namespace NativeCode.BitBucket.Models
+﻿namespace NativeCode.Clients.BitBucket.Models
 {
     using System.Runtime.Serialization;
 

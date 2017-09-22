@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace NativeCode.BitBucket.Tests
+﻿namespace NativeCode.Tests
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Xunit;
+
     public class WhenUsingBitBucketClient : IClassFixture<BitBucketClientFixture>
     {
         public WhenUsingBitBucketClient(BitBucketClientFixture fixture)
