@@ -1,10 +1,7 @@
-﻿namespace NativeCode.BitBucket.Extensions
+﻿namespace NativeCode.Clients.Extensions
 {
-    using System.Linq;
     using System.Net.Http;
     using System.Text;
-    using JetBrains.Annotations;
-    using Newtonsoft.Json;
 
     public static class HttpRequestMessageExtensions
     {
