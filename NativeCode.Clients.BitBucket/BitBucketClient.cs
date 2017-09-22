@@ -17,8 +17,7 @@
     {
         private readonly BitBucketClientOptions options;
 
-        public BitBucketClient([NotNull] BitBucketClientOptions options, HttpMessageHandler handler = default(HttpMessageHandler))
-            : base(handler, handler != default(HttpMessageHandler))
+        public BitBucketClient([NotNull] BitBucketClientOptions options)
         {
             this.options = options;
 
