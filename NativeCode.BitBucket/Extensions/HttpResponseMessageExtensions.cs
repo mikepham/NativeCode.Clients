@@ -1,13 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-using Newtonsoft.Json;
-
-namespace NativeCode.BitBucket.Extensions
+﻿namespace NativeCode.BitBucket.Extensions
 {
+    using System;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using JetBrains.Annotations;
+    using Newtonsoft.Json;
+
     public static class HttpResponseMessageExtensions
     {
         public static async Task<T> DeserializeAsync<T>([NotNull] this HttpResponseMessage response)

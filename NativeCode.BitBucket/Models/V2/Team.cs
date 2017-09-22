@@ -1,7 +1,7 @@
-﻿using System.Runtime.Serialization;
-
-namespace NativeCode.BitBucket.Models.V2
+﻿namespace NativeCode.BitBucket.Models.V2
 {
+    using System.Runtime.Serialization;
+
     [DataContract]
     public class Team
     {

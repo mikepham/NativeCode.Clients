@@ -3,15 +3,15 @@
     public enum ResourceType
     {
         Invalid = 0,
-        
+
         Author,
-        
+
         Branch,
-        
+
         Commit,
-        
+
         Repository,
-        
-        User,
+
+        User
     }
 }

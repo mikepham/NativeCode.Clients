@@ -1,29 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-using NativeCode.BitBucket.Extensions;
-using NativeCode.BitBucket.Models;
-using NativeCode.BitBucket.Models.V2;
-using NativeCode.BitBucket.Resources;
-
-namespace NativeCode.BitBucket
+﻿namespace NativeCode.BitBucket
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Extensions;
+    using JetBrains.Annotations;
+    using Models;
+    using Models.V2;
+    using Resources;
+
     public class BitBucketClient : HttpClient, IBitBucketClient
     {
         private readonly BitBucketClientOptions options;
 
-        public BitBucketClient([NotNull] BitBucketClientOptions options, HttpMessageHandler handler) : base(handler, true)
+        public BitBucketClient([NotNull] BitBucketClientOptions options, HttpMessageHandler handler) : base(handler,
+            true)
         {
             this.options = options;
             this.BaseAddress = this.options.BaseAddress;
-            
+
             if (this.options.Credentials != null)
             {
                 this.DefaultRequestHeaders.Authorization =
@@ -60,7 +60,8 @@ namespace NativeCode.BitBucket
             };
         }
 
-        public async Task<IEnumerable<TResponse>> GetAllAsync<TResponse>(IBitBucketResource resource, BitBucketClientContext context)
+        public async Task<IEnumerable<TResponse>> GetAllAsync<TResponse>(IBitBucketResource resource,
+            BitBucketClientContext context)
         {
             var results = new List<TResponse>(200);
             var url = this.BuildUri(context, () => resource.GetResourcePageUrl(context));

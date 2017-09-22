@@ -1,10 +1,10 @@
-﻿using System;
-using System.Runtime.Serialization;
-using NativeCode.BitBucket.JsonExtensions;
-using Newtonsoft.Json;
-
-namespace NativeCode.BitBucket.Models.V2
+﻿namespace NativeCode.BitBucket.Models.V2
 {
+    using System;
+    using System.Runtime.Serialization;
+    using JsonExtensions;
+    using Newtonsoft.Json;
+
     [DataContract]
     public class User
     {

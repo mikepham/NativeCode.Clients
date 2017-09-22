@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
-using NativeCode.BitBucket.Models;
-
-namespace NativeCode.BitBucket
+﻿namespace NativeCode.BitBucket
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using JetBrains.Annotations;
+    using Models;
+
     public interface IBitBucketResource
     {
         [NotNull]
@@ -30,7 +30,7 @@ namespace NativeCode.BitBucket
         Task<IEnumerable<T>> GetAllAsync(BitBucketClientContext context);
 
         Task<ResourcePagingResponse<T>> GetPageAsync(BitBucketClientContext context);
-        
+
         Task<T> GetAsync(BitBucketClientContext context);
 
         Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, BitBucketClientContext context);

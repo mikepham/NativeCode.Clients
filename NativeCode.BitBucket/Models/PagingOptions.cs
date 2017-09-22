@@ -1,7 +1,7 @@
-﻿using System.Runtime.Serialization;
-
-namespace NativeCode.BitBucket.Models
+﻿namespace NativeCode.BitBucket.Models
 {
+    using System.Runtime.Serialization;
+
     [DataContract]
     public class PagingOptions
     {

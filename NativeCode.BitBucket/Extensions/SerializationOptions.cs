@@ -1,8 +1,8 @@
-﻿using NativeCode.BitBucket.JsonExtensions;
-using Newtonsoft.Json;
-
-namespace NativeCode.BitBucket.Extensions
+﻿namespace NativeCode.BitBucket.Extensions
 {
+    using JsonExtensions;
+    using Newtonsoft.Json;
+
     internal static class SerializationOptions
     {
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
@@ -11,7 +11,7 @@ namespace NativeCode.BitBucket.Extensions
             DateFormatHandling = DateFormatHandling.IsoDateFormat,
             DateParseHandling = DateParseHandling.DateTimeOffset,
             Formatting = Formatting.Indented,
-            NullValueHandling = NullValueHandling.Ignore,
+            NullValueHandling = NullValueHandling.Ignore
         };
     }
 }

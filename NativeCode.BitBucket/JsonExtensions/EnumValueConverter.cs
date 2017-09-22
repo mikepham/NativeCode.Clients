@@ -1,8 +1,8 @@
-﻿using System;
-using Newtonsoft.Json;
-
-namespace NativeCode.BitBucket.JsonExtensions
+﻿namespace NativeCode.BitBucket.JsonExtensions
 {
+    using System;
+    using Newtonsoft.Json;
+
     public class EnumValueConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -13,7 +13,8 @@ namespace NativeCode.BitBucket.JsonExtensions
             }
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer)
         {
             if (objectType.IsEnum && reader.Value is string)
             {

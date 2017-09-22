@@ -1,8 +1,8 @@
-﻿using System;
-using NativeCode.BitBucket.Models.V2;
-
-namespace NativeCode.BitBucket.Resources
+﻿namespace NativeCode.BitBucket.Resources
 {
+    using System;
+    using Models.V2;
+
     public class BranchResource : BitBucketResource<Branch>
     {
         public BranchResource(IBitBucketClient client) : base(client)

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Net.Mime;
-using NativeCode.BitBucket.Models.V2;
-
-namespace NativeCode.BitBucket.Resources
+﻿namespace NativeCode.BitBucket.Resources
 {
+    using System;
+    using Models.V2;
+
     public class UserResource : BitBucketResource<User>
     {
         public UserResource(IBitBucketClient client) : base(client)

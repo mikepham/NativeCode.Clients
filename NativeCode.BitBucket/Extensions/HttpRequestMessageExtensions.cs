@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Net.Http;
-using System.Text;
-using JetBrains.Annotations;
-using Newtonsoft.Json;
-
-namespace NativeCode.BitBucket.Extensions
+﻿namespace NativeCode.BitBucket.Extensions
 {
+    using System.Linq;
+    using System.Net.Http;
+    using System.Text;
+    using JetBrains.Annotations;
+    using Newtonsoft.Json;
+
     public static class HttpRequestMessageExtensions
     {
         public static bool IsJson([NotNull] this HttpContent content)

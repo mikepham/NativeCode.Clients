@@ -1,8 +1,9 @@
-﻿using System;
-using System.Net;
-
-namespace NativeCode.BitBucket
+﻿namespace NativeCode.BitBucket
 {
+    using System;
+    using System.Diagnostics;
+    using System.Net;
+
     public class BitBucketClientOptions
     {
         private const string BitbucketPassword = "BITBUCKET_PASSWORD";
@@ -11,16 +12,23 @@ namespace NativeCode.BitBucket
 
         public BitBucketClientOptions()
         {
-            var password = Environment.GetEnvironmentVariable(BitbucketPassword);
-            var username = Environment.GetEnvironmentVariable(BitbucketUsername);
-
-            if ((string.IsNullOrWhiteSpace(username) && string.IsNullOrWhiteSpace(password)) == false)
+            try
             {
-                this.Credentials = new NetworkCredential
+                var password = Environment.GetEnvironmentVariable(BitbucketPassword);
+                var username = Environment.GetEnvironmentVariable(BitbucketUsername);
+
+                if ((string.IsNullOrWhiteSpace(username) && string.IsNullOrWhiteSpace(password)) == false)
                 {
-                    Password = password,
-                    UserName = username
-                };
+                    this.Credentials = new NetworkCredential
+                    {
+                        Password = password,
+                        UserName = username
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine($"Failed to get credentials from environment: {ex.Message}");
             }
         }
 

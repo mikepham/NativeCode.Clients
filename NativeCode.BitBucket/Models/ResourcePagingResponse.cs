@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-
-namespace NativeCode.BitBucket.Models
+﻿namespace NativeCode.BitBucket.Models
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Serialization;
+
     [DataContract]
     public class ResourcePagingResponse<T> : PagingOptions, IResponse
     {

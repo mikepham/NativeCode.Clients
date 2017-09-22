@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
-using System.Reflection;
-using System.Threading.Tasks;
-using Humanizer;
-using NativeCode.BitBucket.Models;
-
-namespace NativeCode.BitBucket
+﻿namespace NativeCode.BitBucket
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using Humanizer;
+    using Models;
+
     public abstract class BitBucketResource<T> : IBitBucketResource<T>
         where T : class, new()
     {
@@ -75,7 +72,7 @@ namespace NativeCode.BitBucket
                 throw;
             }
         }
-        
+
         public abstract string GetActionUrl(BitBucketClientContext context);
 
         public abstract string GetResourcePageUrl(BitBucketClientContext context);

@@ -1,15 +1,15 @@
-﻿using System.Runtime.Serialization;
-using NativeCode.BitBucket.JsonExtensions;
-using Newtonsoft.Json;
-
-namespace NativeCode.BitBucket.Models.V2
+﻿namespace NativeCode.BitBucket.Models.V2
 {
+    using System.Runtime.Serialization;
+    using JsonExtensions;
+    using Newtonsoft.Json;
+
     [DataContract]
     public class Branch
     {
         [DataMember]
         public string Name { get; protected set; }
-        
+
         [DataMember]
         public Target Target { get; protected set; }
 

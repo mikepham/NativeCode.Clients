@@ -1,9 +1,9 @@
-﻿using System.Net;
-using System.Net.Http;
-using JetBrains.Annotations;
-
-namespace NativeCode.BitBucket
+﻿namespace NativeCode.BitBucket
 {
+    using System.Net;
+    using System.Net.Http;
+    using JetBrains.Annotations;
+
     public class BitBucketClientFactory : IBitBucketClientFactory
     {
         public IBitBucketClient Create(BitBucketClientOptions options)
@@ -22,7 +22,7 @@ namespace NativeCode.BitBucket
                 handler.CookieContainer = new CookieContainer();
                 handler.Credentials = options.Credentials;
                 handler.PreAuthenticate = options.Credentials != null;
-                
+
                 return handler;
             }
             catch

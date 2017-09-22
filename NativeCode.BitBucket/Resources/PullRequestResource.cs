@@ -1,8 +1,8 @@
-﻿using System;
-using NativeCode.BitBucket.Models.V2;
-
-namespace NativeCode.BitBucket.Resources
+﻿namespace NativeCode.BitBucket.Resources
 {
+    using System;
+    using Models.V2;
+
     public class PullRequestResource : BitBucketResource<PullRequest>
     {
         public PullRequestResource(IBitBucketClient client) : base(client)
@@ -18,7 +18,8 @@ namespace NativeCode.BitBucket.Resources
 
                 case BitBucketClientType.ApiV2:
                 case BitBucketClientType.Cloud:
-                    return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/pullrequests/{context.PullRequestSlug}";
+                    return
+                        $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/pullrequests/{context.PullRequestSlug}";
 
                 default:
                     throw new InvalidOperationException();
@@ -50,7 +51,8 @@ namespace NativeCode.BitBucket.Resources
 
                 case BitBucketClientType.ApiV2:
                 case BitBucketClientType.Cloud:
-                    return $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/pullrequests/{context.PullRequestSlug}";
+                    return
+                        $"/2.0/repositories/{context.IdSlug}/{context.RepoSlug}/pullrequests/{context.PullRequestSlug}";
 
                 default:
                     throw new InvalidOperationException();

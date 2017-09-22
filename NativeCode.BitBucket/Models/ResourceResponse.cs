@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace NativeCode.BitBucket.Models
+﻿namespace NativeCode.BitBucket.Models
 {
+    using System.Collections.Generic;
+
     public abstract class ResourceResponse<T> : IResponse
     {
         public IEnumerable<ErrorResponse> Errors { get; }

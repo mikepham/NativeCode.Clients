@@ -1,19 +1,19 @@
-﻿using System.Runtime.Serialization;
-using NativeCode.BitBucket.JsonExtensions;
-using Newtonsoft.Json;
-
-namespace NativeCode.BitBucket.Models.V2
+﻿namespace NativeCode.BitBucket.Models.V2
 {
+    using System.Runtime.Serialization;
+    using JsonExtensions;
+    using Newtonsoft.Json;
+
     [DataContract]
     public class Author
     {
         [DataMember]
         public string Raw { get; protected set; }
-        
+
         [DataMember]
         [JsonConverter(typeof(EnumValueConverter))]
         public ResourceType Type { get; protected set; }
-        
+
         [DataMember]
         public User User { get; protected set; }
     }
