@@ -24,7 +24,7 @@
         public Repository Repository { get; protected set; }
 
         [DataMember]
-        [JsonConverter(typeof(EnumValueConverter))]
+        [JsonConverter(typeof(EnumJsonConverter))]
         public ResourceType Type { get; protected set; }
     }
 }

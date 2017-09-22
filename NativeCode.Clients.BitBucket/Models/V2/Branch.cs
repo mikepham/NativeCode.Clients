@@ -14,7 +14,7 @@
         public Target Target { get; protected set; }
 
         [DataMember]
-        [JsonConverter(typeof(EnumValueConverter))]
+        [JsonConverter(typeof(EnumJsonConverter))]
         public ResourceType Type { get; protected set; }
     }
 }

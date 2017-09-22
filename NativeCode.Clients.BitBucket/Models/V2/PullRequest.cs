@@ -33,7 +33,7 @@
         public string Reason { get; }
 
         [DataMember]
-        [JsonConverter(typeof(EnumValueConverter))]
+        [JsonConverter(typeof(EnumJsonConverter))]
         public PullRequestState State { get; }
 
         [DataMember]
@@ -43,7 +43,7 @@
         public string Title { get; }
 
         [DataMember]
-        [JsonConverter(typeof(EnumValueConverter))]
+        [JsonConverter(typeof(EnumJsonConverter))]
         public ResourceType Type { get; }
 
         [DataMember]

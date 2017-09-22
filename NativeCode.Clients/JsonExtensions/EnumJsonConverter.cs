@@ -3,7 +3,7 @@
     using System;
     using Newtonsoft.Json;
 
-    public class EnumValueConverter : JsonConverter
+    public class EnumJsonConverter : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
