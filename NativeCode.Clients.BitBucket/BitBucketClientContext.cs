@@ -1,17 +1,14 @@
 ﻿namespace NativeCode.Clients.BitBucket
 {
-    using System.Collections.Generic;
     using Models.V2;
 
-    public class BitBucketClientContext
+    public class BitBucketClientContext : ClientContext
     {
         public string BranchSlug { get; set; }
 
         public BitBucketClientType ClientType { get; set; }
 
         public string IdSlug { get; set; }
-
-        public IDictionary<string, string> Parameters { get; } = new Dictionary<string, string>();
 
         public string PullRequestSlug { get; set; }
 

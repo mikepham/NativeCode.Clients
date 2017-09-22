@@ -15,7 +15,7 @@
                 throw new InvalidOperationException("Invalid request parameters to deserialize.");
             }
 
-            var content = await response.Content.ReadAsStringAsync();
+            var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<T>(content, SerializationOptions.Settings);
         }
     }

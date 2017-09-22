@@ -1,4 +1,4 @@
-﻿namespace NativeCode.Clients.BitBucket.Models
+﻿namespace NativeCode.Clients.Responses
 {
     public class Link
     {

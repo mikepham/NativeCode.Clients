@@ -1,27 +1,28 @@
-﻿namespace NativeCode.Clients.BitBucket
+﻿namespace NativeCode.Clients
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading.Tasks;
     using Humanizer;
-    using Models;
+    using Responses;
 
-    public abstract class BitBucketResource<T> : IBitBucketResource<T>
+    public abstract class RestResource<T, TContext> : IRestResource<T, TContext>
         where T : class, new()
+        where TContext : ClientContext, new()
     {
-        protected BitBucketResource(IBitBucketClient client)
+        protected RestResource(IRestClient<TContext> client)
         {
             this.Client = client;
         }
 
-        protected IBitBucketClient Client { get; }
+        protected IRestClient<TContext> Client { get; }
 
         public virtual string ResourceName => typeof(T).Name.Camelize();
 
         public virtual Type Type => typeof(T);
 
-        public virtual async Task<IEnumerable<T>> GetAllAsync(BitBucketClientContext context)
+        public virtual async Task<IEnumerable<T>> GetAllAsync(TContext context)
         {
             try
             {
@@ -34,7 +35,7 @@
             }
         }
 
-        public virtual async Task<T> GetAsync(BitBucketClientContext context)
+        public virtual async Task<T> GetAsync(TContext context)
         {
             try
             {
@@ -47,7 +48,7 @@
             }
         }
 
-        public virtual async Task<ResourcePagingResponse<T>> GetPageAsync(BitBucketClientContext context)
+        public virtual async Task<ResourcePagingResponse<T>> GetPageAsync(TContext context)
         {
             try
             {
@@ -60,7 +61,7 @@
             }
         }
 
-        public virtual async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, BitBucketClientContext context)
+        public virtual async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, TContext context)
         {
             try
             {
@@ -73,10 +74,10 @@
             }
         }
 
-        public abstract string GetActionUrl(BitBucketClientContext context);
+        public abstract string GetActionUrl(TContext context);
 
-        public abstract string GetResourcePageUrl(BitBucketClientContext context);
+        public abstract string GetResourcePageUrl(TContext context);
 
-        public abstract string GetResourceUrl(BitBucketClientContext context);
+        public abstract string GetResourceUrl(TContext context);
     }
 }

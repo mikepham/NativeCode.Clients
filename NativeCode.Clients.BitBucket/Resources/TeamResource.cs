@@ -3,7 +3,7 @@
     using System;
     using Models.V2;
 
-    public class TeamResource : BitBucketResource<Team>
+    public class TeamResource : RestResource<Team, BitBucketClientContext>
     {
         public TeamResource(IBitBucketClient client) : base(client)
         {

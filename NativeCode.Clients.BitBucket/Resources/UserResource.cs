@@ -3,7 +3,7 @@
     using System;
     using Models.V2;
 
-    public class UserResource : BitBucketResource<User>
+    public class UserResource : RestResource<User, BitBucketClientContext>
     {
         public UserResource(IBitBucketClient client) : base(client)
         {

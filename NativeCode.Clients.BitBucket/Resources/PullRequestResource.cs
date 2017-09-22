@@ -3,7 +3,7 @@
     using System;
     using Models.V2;
 
-    public class PullRequestResource : BitBucketResource<PullRequest>
+    public class PullRequestResource : RestResource<PullRequest, BitBucketClientContext>
     {
         public PullRequestResource(IBitBucketClient client) : base(client)
         {

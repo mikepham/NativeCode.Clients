@@ -10,9 +10,8 @@
     using System.Threading.Tasks;
     using Extensions;
     using JetBrains.Annotations;
-    using Models;
-    using Models.V2;
     using Resources;
+    using Responses;
 
     public class BitBucketClient : HttpClient, IBitBucketClient
     {
@@ -43,8 +42,6 @@
 
         public PullRequestResource PullRequests { get; }
 
-        public IBitBucketResource<Repository> Repositories => throw new NotSupportedException();
-
         public TeamResource Teams { get; }
 
         public UserResource Users { get; }
@@ -59,7 +56,7 @@
             };
         }
 
-        public async Task<IEnumerable<TResponse>> GetAllAsync<TResponse>(IBitBucketResource resource,
+        public async Task<IEnumerable<TResponse>> GetAllAsync<TResponse>(IRestResource<BitBucketClientContext> resource,
             BitBucketClientContext context)
         {
             var results = new List<TResponse>(200);
@@ -79,7 +76,7 @@
             return results;
         }
 
-        public async Task<ResourcePagingResponse<TResponse>> GetPageAsync<TResponse>(IBitBucketResource resource,
+        public async Task<ResourcePagingResponse<TResponse>> GetPageAsync<TResponse>(IRestResource<BitBucketClientContext> resource,
             BitBucketClientContext context)
         {
             var url = this.BuildUri(context, () => resource.GetResourcePageUrl(context));
@@ -88,7 +85,7 @@
             return await response.DeserializeAsync<ResourcePagingResponse<TResponse>>().ConfigureAwait(false);
         }
 
-        public async Task<TResponse> GetAsync<TResponse>(IBitBucketResource resource, BitBucketClientContext context)
+        public async Task<TResponse> GetAsync<TResponse>(IRestResource<BitBucketClientContext> resource, BitBucketClientContext context)
         {
             var url = this.BuildUri(context, () => resource.GetResourceUrl(context));
             var response = await this.GetAsync(url.Uri).ConfigureAwait(false);
@@ -96,7 +93,7 @@
             return await response.DeserializeAsync<TResponse>().ConfigureAwait(false);
         }
 
-        public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest instance, IBitBucketResource resource,
+        public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest instance, IRestResource<BitBucketClientContext> resource,
             BitBucketClientContext context)
         {
             var url = this.BuildUri(context, () => resource.GetActionUrl(context));

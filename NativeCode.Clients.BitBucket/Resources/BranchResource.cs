@@ -3,7 +3,7 @@
     using System;
     using Models.V2;
 
-    public class BranchResource : BitBucketResource<Branch>
+    public class BranchResource : RestResource<Branch, BitBucketClientContext>
     {
         public BranchResource(IBitBucketClient client) : base(client)
         {
