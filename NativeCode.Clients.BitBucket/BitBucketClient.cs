@@ -18,17 +18,17 @@
     {
         private readonly BitBucketClientOptions options;
 
-        public BitBucketClient([NotNull] BitBucketClientOptions options, HttpMessageHandler handler = null)
-            : base(handler, true)
+        public BitBucketClient([NotNull] BitBucketClientOptions options, HttpMessageHandler handler = default(HttpMessageHandler))
+            : base(handler, handler != default(HttpMessageHandler))
         {
             this.options = options;
-            this.BaseAddress = this.options.BaseAddress;
 
             if (this.options.Credentials != null)
             {
-                this.DefaultRequestHeaders.Authorization = BasicAuth(this.options.Credentials);
+                this.DefaultRequestHeaders.Authorization = CreateAuthorization(this.options.Credentials);
             }
 
+            this.BaseAddress = this.options.BaseAddress;
             this.Branches = new BranchResource(this);
             this.PullRequests = new PullRequestResource(this);
             this.Teams = new TeamResource(this);
@@ -65,14 +65,14 @@
             var results = new List<TResponse>(200);
             var url = this.BuildUri(context, () => resource.GetResourcePageUrl(context));
 
-            var response = await this.GetAsync(url.Uri);
-            var page = await this.DeserializeAsync<ResourcePagingResponse<TResponse>>(response);
+            var response = await this.GetAsync(url.Uri).ConfigureAwait(false);
+            var page = await response.DeserializeAsync<ResourcePagingResponse<TResponse>>().ConfigureAwait(false);
             results.AddRange(page.Values);
 
-            while (string.IsNullOrWhiteSpace(page.Next) == false)
+            while (page.Next.HasValue())
             {
-                response = await this.GetAsync(page.Next);
-                page = await this.DeserializeAsync<ResourcePagingResponse<TResponse>>(response);
+                response = await this.GetAsync(page.Next).ConfigureAwait(false);
+                page = await response.DeserializeAsync<ResourcePagingResponse<TResponse>>().ConfigureAwait(false);
                 results.AddRange(page.Values);
             }
 
@@ -83,17 +83,17 @@
             BitBucketClientContext context)
         {
             var url = this.BuildUri(context, () => resource.GetResourcePageUrl(context));
-            var response = await this.GetAsync(url.Uri);
+            var response = await this.GetAsync(url.Uri).ConfigureAwait(false);
 
-            return await this.DeserializeAsync<ResourcePagingResponse<TResponse>>(response);
+            return await response.DeserializeAsync<ResourcePagingResponse<TResponse>>().ConfigureAwait(false);
         }
 
         public async Task<TResponse> GetAsync<TResponse>(IBitBucketResource resource, BitBucketClientContext context)
         {
             var url = this.BuildUri(context, () => resource.GetResourceUrl(context));
-            var response = await this.GetAsync(url.Uri);
+            var response = await this.GetAsync(url.Uri).ConfigureAwait(false);
 
-            return await this.DeserializeAsync<TResponse>(response);
+            return await response.DeserializeAsync<TResponse>().ConfigureAwait(false);
         }
 
         public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest instance, IBitBucketResource resource,
@@ -103,12 +103,12 @@
             var request = new HttpRequestMessage(HttpMethod.Post, url.Uri);
             request.Serialize(instance);
 
-            var response = await this.SendAsync(request);
+            var response = await this.SendAsync(request).ConfigureAwait(false);
 
-            return await this.DeserializeAsync<TResponse>(response);
+            return await response.DeserializeAsync<TResponse>().ConfigureAwait(false);
         }
 
-        protected static AuthenticationHeaderValue BasicAuth(NetworkCredential credentials)
+        protected static AuthenticationHeaderValue CreateAuthorization(NetworkCredential credentials)
         {
             var auth = $"{credentials.UserName}:{credentials.Password}";
             var bytes = Encoding.UTF8.GetBytes(auth);
@@ -123,16 +123,6 @@
                 Path = path(),
                 Query = string.Join(string.Empty, context.Parameters.Select(kvp => $"{kvp.Key}={kvp.Value}"))
             };
-        }
-
-        protected virtual async Task<TResponse> DeserializeAsync<TResponse>(HttpResponseMessage response)
-        {
-            if (response.IsSuccessStatusCode == false || response.Content.IsJson() == false)
-            {
-                throw new InvalidOperationException($"Failed to retrieve JSON object: {response.ReasonPhrase}");
-            }
-
-            return await response.DeserializeAsync<TResponse>();
         }
     }
 }

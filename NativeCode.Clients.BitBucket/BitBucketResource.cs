@@ -21,11 +21,11 @@
 
         public virtual Type Type => typeof(T);
 
-        public virtual Task<IEnumerable<T>> GetAllAsync(BitBucketClientContext context)
+        public virtual async Task<IEnumerable<T>> GetAllAsync(BitBucketClientContext context)
         {
             try
             {
-                return this.Client.GetAllAsync<T>(this, context);
+                return await this.Client.GetAllAsync<T>(this, context).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -34,11 +34,11 @@
             }
         }
 
-        public virtual Task<T> GetAsync(BitBucketClientContext context)
+        public virtual async Task<T> GetAsync(BitBucketClientContext context)
         {
             try
             {
-                return this.Client.GetAsync<T>(this, context);
+                return await this.Client.GetAsync<T>(this, context).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -47,11 +47,11 @@
             }
         }
 
-        public virtual Task<ResourcePagingResponse<T>> GetPageAsync(BitBucketClientContext context)
+        public virtual async Task<ResourcePagingResponse<T>> GetPageAsync(BitBucketClientContext context)
         {
             try
             {
-                return this.Client.GetPageAsync<T>(this, context);
+                return await this.Client.GetPageAsync<T>(this, context).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -60,11 +60,11 @@
             }
         }
 
-        public virtual Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, BitBucketClientContext context)
+        public virtual async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, BitBucketClientContext context)
         {
             try
             {
-                return this.Client.PostAsync<TRequest, TResponse>(request, this, context);
+                return await this.Client.PostAsync<TRequest, TResponse>(request, this, context).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

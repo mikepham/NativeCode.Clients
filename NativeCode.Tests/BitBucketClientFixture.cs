@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
     using System.Net;
+    using Clients;
     using Clients.BitBucket;
 
     public class BitBucketClientFixture : IDisposable
@@ -32,7 +33,7 @@
                 var password = Environment.GetEnvironmentVariable(BitbucketPassword);
                 var username = Environment.GetEnvironmentVariable(BitbucketUsername);
 
-                if ((string.IsNullOrWhiteSpace(username) && string.IsNullOrWhiteSpace(password)) == false)
+                if (Args.Require(username, password))
                 {
                     options.Credentials = new NetworkCredential
                     {

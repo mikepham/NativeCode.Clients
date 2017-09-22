@@ -22,7 +22,7 @@
                 var context = client.CreateContext();
 
                 // Act
-                var user = await client.Users.GetAsync(context);
+                var user = await client.Users.GetAsync(context).ConfigureAwait(false);
 
                 // Assert
                 Assert.Equal(client.Credentials.UserName, user.Username);
@@ -38,7 +38,7 @@
                 var context = client.CreateContext("plsos2", "plsos2");
 
                 // Act
-                var branches = await client.Branches.GetAllAsync(context);
+                var branches = await client.Branches.GetAllAsync(context).ConfigureAwait(false);
 
                 // Assert
                 Assert.True(branches.Any());
@@ -54,7 +54,7 @@
                 var context = client.CreateContext("plsos2", "plsos2");
 
                 // Act
-                var pullRequests = await client.PullRequests.GetAllAsync(context);
+                var pullRequests = await client.PullRequests.GetAllAsync(context).ConfigureAwait(false);
 
                 // Assert
                 Assert.NotNull(pullRequests);
