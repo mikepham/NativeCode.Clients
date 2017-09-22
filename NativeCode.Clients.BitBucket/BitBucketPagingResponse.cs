@@ -22,5 +22,25 @@
 
         [DataMember]
         public IEnumerable<T> Values { get; protected set; } = Enumerable.Empty<T>();
+
+        public override int GetPageIndex()
+        {
+            return this.Page;
+        }
+
+        public override int GetPageCount()
+        {
+            return this.Pagelen;
+        }
+
+        public override int GetPageSize()
+        {
+            return this.Size;
+        }
+
+        public override string GetNextPageUrl()
+        {
+            return this.Next;
+        }
     }
 }

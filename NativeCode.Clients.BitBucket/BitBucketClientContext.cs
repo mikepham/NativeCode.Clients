@@ -14,6 +14,12 @@
 
         public string RepoSlug { get; set; }
 
+        public RoleType Role
+        {
+            get => this.GetEnumParameter<RoleType>();
+            set => this.SetEnumParameter(value);
+        }
+
         public ResourceType ResourceType { get; set; }
     }
 }

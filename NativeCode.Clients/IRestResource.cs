@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using JetBrains.Annotations;
+    using Newtonsoft.Json;
     using Responses;
 
     public interface IRestResource<in TContext> where TContext : ClientContext, new()
@@ -12,10 +13,13 @@
         string ResourceName { get; }
 
         [NotNull]
+        JsonSerializerSettings SerializationSettings { get; }
+
+        [NotNull]
         Type Type { get; }
 
         [NotNull]
-        string GetResourcePageUrl([NotNull] TContext context);
+        string GetPagingUrl([NotNull] TContext context);
 
         [NotNull]
         string GetActionUrl([NotNull] TContext context);

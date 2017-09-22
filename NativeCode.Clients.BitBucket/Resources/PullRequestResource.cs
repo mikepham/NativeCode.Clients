@@ -42,7 +42,7 @@
             }
         }
 
-        public override string GetResourcePageUrl(BitBucketClientContext context)
+        public override string GetPagingUrl(BitBucketClientContext context)
         {
             switch (context.ClientType)
             {

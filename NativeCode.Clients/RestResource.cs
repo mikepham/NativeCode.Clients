@@ -5,6 +5,8 @@
     using System.Diagnostics;
     using System.Threading.Tasks;
     using Humanizer;
+    using JsonExtensions;
+    using Newtonsoft.Json;
     using Responses;
 
     public abstract class RestResource<T, TContext> : IRestResource<T, TContext>
@@ -19,6 +21,17 @@
         protected IRestClient<TContext> Client { get; }
 
         public virtual string ResourceName => typeof(T).Name.Camelize();
+
+        public JsonSerializerSettings SerializationSettings { get; } = new JsonSerializerSettings
+        {
+            ContractResolver = new UnderscoreContractResolver(),
+            DateFormatHandling = DateFormatHandling.IsoDateFormat,
+            DateParseHandling = DateParseHandling.DateTimeOffset,
+#if DEBUG
+            Formatting = Formatting.Indented,
+#endif
+            NullValueHandling = NullValueHandling.Ignore
+        };
 
         public virtual Type Type => typeof(T);
 
@@ -76,7 +89,7 @@
 
         public abstract string GetActionUrl(TContext context);
 
-        public abstract string GetResourcePageUrl(TContext context);
+        public abstract string GetPagingUrl(TContext context);
 
         public abstract string GetResourceUrl(TContext context);
     }
